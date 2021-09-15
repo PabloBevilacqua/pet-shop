@@ -113,6 +113,11 @@ public class Producto implements Serializable {
         this.imagenURL = imagenURL;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", descripcion=" + descripcion + ", marca=" + marca + ", categoria=" + categoria + ", stock=" + stock + ", precioUnitario=" + precioUnitario + ", imagenURL=" + imagenURL + '}';
+    }
+
    
     
     
