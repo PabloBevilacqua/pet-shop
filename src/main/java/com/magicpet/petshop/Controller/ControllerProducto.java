@@ -38,10 +38,15 @@ public class ControllerProducto {
         return "redirect:/producto/list";
     }
     
+    @GetMapping("/edit")
+    public String editProducto(@RequestParam(required = true) String id ){
+    
+        return "redirect:/producto/form";
+    }
     
     @GetMapping("/delete")
     public String eliminarProducto(@RequestParam(required = true) String id){
-    
+        productoServicio.deleteById(id)
         return "redirect:/producto/list";
     }
     
