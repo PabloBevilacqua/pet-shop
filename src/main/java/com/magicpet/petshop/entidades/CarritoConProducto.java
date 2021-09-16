@@ -61,6 +61,11 @@ public class CarritoConProducto implements Serializable {
     public void setPrecioTotal(Double precioTotal) {
         this.precioTotal = precioTotal;
     }
+
+    @Override
+    public String toString() {
+        return "CarritoConProducto{" + "id=" + id + ", carrito=" + carrito + ", cantidad=" + cantidad + ", precioTotal=" + precioTotal + '}';
+    }
     
     
     

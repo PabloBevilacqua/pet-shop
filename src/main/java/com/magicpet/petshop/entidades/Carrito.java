@@ -65,6 +65,11 @@ public class Carrito implements Serializable {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Carrito{" + "id=" + id + ", fecha=" + fecha + ", usuario=" + usuario + ", status=" + status + '}';
+    }
     
     
     
