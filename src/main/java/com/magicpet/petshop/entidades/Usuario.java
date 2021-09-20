@@ -1,30 +1,42 @@
-
 package com.magicpet.petshop.entidades;
 
+import com.magicpet.petshop.enums.Role;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
 public class Usuario implements Serializable {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private String dni;
     private String nombre;
+    private String apellido;
+    private Integer edad;
+    private String dni;
+    private String ciudad;
     private String mail;
+    private String username;
+    private String password;
+    @Enumerated(EnumType.STRING)
+    private Role rol;
 
     public Usuario() {
     }
 
-    public Usuario(String id, String nombre, String mail) {
-        this.id = id;
-        this.nombre = nombre;
-        this.mail = mail;
+    public Role getRol() {
+        return rol;
+    }
+
+    public void setRol(Role rol) {
+        this.rol = rol;
     }
 
     public String getId() {
@@ -35,12 +47,44 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 
     public String getMail() {
@@ -50,7 +94,23 @@ public class Usuario implements Serializable {
     public void setMail(String mail) {
         this.mail = mail;
     }
+
     
-    
-    
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.magicpet.petshop.enums;
 
-public enum Roles {
+public enum Role {
     
     ADMIN,USER;
     
