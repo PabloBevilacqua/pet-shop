@@ -51,6 +51,7 @@ public class ProductoServicio {
         return productoRepositorio.findAll();
     }
     
+
     
     private void validar(String nombre, String codigo, String descripcion, String marca, String categoria) throws ErrorServicio {
 
