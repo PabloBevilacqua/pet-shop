@@ -23,6 +23,18 @@ public class ProductoServicio {
         
         productoRepositorio.save(producto);
     }
+    
+    @Transactional
+    public void modificarProducto(Producto producto) throws ErrorServicio{
+        Optional<Producto> respuesta = productoRepositorio.findById(producto.getId());
+        if (respuesta.isPresent()) {
+            validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
+            validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
+            productoRepositorio.save(producto);
+        } else {
+            throw new ErrorServicio("El producto no existe");
+        }
+    }
 
     @Transactional
     public void eliminarProducto(String id) throws ErrorServicio {

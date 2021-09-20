@@ -16,19 +16,31 @@ public class CategoriaServicio {
     private CategoriaRepositorio categoriaRepositorio;
     
     @Transactional
-    public void registrarCategoria(Categoria categoria) throws ErrorServicio{
+    public void registrarCategoria(Categoria categoria) throws ErrorServicio {
         validar(categoria.getNombre());
         categoriaRepositorio.save(categoria);
-    } 
+    }
+
     @Transactional
-    public void eliminarCategoria(String id) throws ErrorServicio{
+    public void modificarCategoria(Categoria categoria) throws ErrorServicio {
+        Optional<Categoria> respuesta = categoriaRepositorio.findById(categoria.getId());
+        if (respuesta.isPresent()) {
+            validar(categoria.getNombre());
+            categoriaRepositorio.save(categoria);
+        } else {
+            throw new ErrorServicio("La categoria no existe");
+        }
+    }
+
+    @Transactional
+    public void eliminarCategoria(String id) throws ErrorServicio {
         Optional<Categoria> respuesta = categoriaRepositorio.findById(id);
         if (respuesta.isPresent()) {
-            categoriaRepositorio.delete(respuesta.get());   
-        }else{
+            categoriaRepositorio.delete(respuesta.get());
+        } else {
             throw new ErrorServicio("No se encontró la categoria");
         }
-        
+
     }
     
     
