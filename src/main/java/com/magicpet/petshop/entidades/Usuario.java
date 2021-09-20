@@ -1,6 +1,9 @@
 package com.magicpet.petshop.entidades;
+<<<<<<< HEAD
 
 import com.magicpet.petshop.enums.Role;
+=======
+>>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -38,7 +41,7 @@ public class Usuario implements Serializable {
     public void setRol(Role rol) {
         this.rol = rol;
     }
-
+    
     public String getId() {
         return id;
     }
@@ -96,6 +99,16 @@ public class Usuario implements Serializable {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+>>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
 =======
     @Override
     public String toString() {
@@ -103,6 +116,7 @@ public class Usuario implements Serializable {
     }
 >>>>>>> 9a65d1f089e09d30f7640cde7b56be6f61e0212a
     
+<<<<<<< HEAD
 
     public String getDni() {
         return dni;
@@ -120,4 +134,9 @@ public class Usuario implements Serializable {
         this.edad = edad;
     }
 
+=======
+>>>>>>> 9a65d1f089e09d30f7640cde7b56be6f61e0212a
+    
+    
+>>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
 }
