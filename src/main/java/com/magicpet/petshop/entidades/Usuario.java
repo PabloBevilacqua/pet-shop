@@ -1,6 +1,5 @@
 
 package com.magicpet.petshop.entidades;
-
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
         this.mail = mail;
     }
-
+    
     public String getId() {
         return id;
     }
@@ -50,7 +49,14 @@ public class Usuario implements Serializable {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
     
     
 }
