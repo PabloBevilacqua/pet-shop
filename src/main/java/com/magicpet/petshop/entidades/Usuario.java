@@ -50,6 +50,7 @@ public class Usuario implements Serializable {
         this.mail = mail;
     }
 
+<<<<<<< HEAD
     public String getDni() {
         return dni;
     }
@@ -57,6 +58,13 @@ public class Usuario implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
+=======
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", mail=" + mail + '}';
+    }
+    
+>>>>>>> 9a65d1f089e09d30f7640cde7b56be6f61e0212a
     
     
 }
