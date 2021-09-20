@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @RequestMapping("/producto")
-public class ControllerProducto {
+public class ProductoController {
 
     @Autowired
     private ProductoServicio productoServicio;
@@ -39,7 +39,7 @@ public class ControllerProducto {
     private String registrarProducto(Model model, String id, RedirectAttributes redirectAttributes, @ModelAttribute Producto producto) throws ErrorServicio {
         try {
             Optional<Producto> respuesta = productoRepositorio.findById(id);
-            if (respuesta.isPresent()) {
+            if (respuesta.isPresent()){
                 productoServicio.registrarProducto(producto);
                 return "templates.admin/producto-form";//cambiar si esta mal(/ o .)
             }
@@ -48,21 +48,8 @@ public class ControllerProducto {
               redirectAttributes.addFlashAttribute("error",e.getMessage());
         }
 
-        return "redirect:templates.admin/producto-list";
+        return "templates.admin/producto/list";
     }
-
-//    @PostMapping("/save")
-//    public String guardarProducto(Model model, RedirectAttributes redirectAttributes,ModelAttribute modelAttribute, Producto producto ) {
-//
-//        return "redirect:/producto/list";
-//    }
-    @GetMapping("/edit")
-    public String editProducto(@RequestParam(required = true) String id
-    ) {
-
-        return "redirect:/producto/form";
-    }
-
     @GetMapping("/delete")
     public String eliminarProducto(@RequestParam(required = true) String id) throws ErrorServicio {
         productoServicio.eliminarProducto(id);
