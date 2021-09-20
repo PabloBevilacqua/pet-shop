@@ -1,4 +1,3 @@
-
 package com.magicpet.petshop.servicios;
 
 import com.magicpet.petshop.entidades.Categoria;
@@ -11,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoriaServicio {
-    
+
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
-    
+
     @Transactional
     public void registrarCategoria(Categoria categoria) throws ErrorServicio {
         validar(categoria.getNombre());
@@ -42,11 +41,9 @@ public class CategoriaServicio {
         }
 
     }
-    
-    
-    
-    public void validar(String nombre) throws ErrorServicio{
-        
+
+    public void validar(String nombre) throws ErrorServicio {
+
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");
         }
