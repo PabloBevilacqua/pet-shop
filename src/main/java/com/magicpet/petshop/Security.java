@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 
-
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -33,10 +31,7 @@ public class Security extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/login?logout")
                 .and().csrf().disable();
 
-                
-        
-        
-        
+  
     }
     
 }
