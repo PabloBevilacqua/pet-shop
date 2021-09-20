@@ -43,6 +43,7 @@ public class AdminController {
         // Buscar producto por id
         // Agregar el producto al Modle
         // Devolver el template de formulario agregar (con el objeto)
+        //afdafadfadfadgfadGADGFADGAFGAGDAFGDA 
     }
 
     @GetMapping("/admin/producto/edit")
