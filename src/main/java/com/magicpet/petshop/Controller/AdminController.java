@@ -22,7 +22,7 @@ public class AdminController {
     @GetMapping("/")
     public String index() {
 
-        return "templates.admin/index";
+        return "admin/index";
     }
 
     @GetMapping("/producto")
