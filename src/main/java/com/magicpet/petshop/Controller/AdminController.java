@@ -25,19 +25,19 @@ public class AdminController {
         return "templates.admin/index";
     }
 
-    @GetMapping("/admin/producto")
+    @GetMapping("/producto")
     public String adminListProducto() {
 
         return "producto-list";
     }
 
-    @GetMapping("/admin/producto/save")
+    @GetMapping("/producto/save")
     public String adminSaveProducto() {
 
         return "producto-form";
     }
 
-    @GetMapping("/productos/edit/{id_producto}")
+    @GetMapping("/edit/{id_producto}")
     public String vistaEditar(@PathVariable String id_producto, Model model) {
         return null;
         // Buscar producto por id
@@ -46,7 +46,7 @@ public class AdminController {
         
     }
 
-    @GetMapping("/admin/producto/edit")
+    @GetMapping("/producto/edit")
     public String adminEditProducto() {
 
         return "producto-form";
