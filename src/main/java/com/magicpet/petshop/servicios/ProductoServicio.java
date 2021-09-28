@@ -1,4 +1,3 @@
-
 package com.magicpet.petshop.servicios;
 
 import com.magicpet.petshop.entidades.Producto;
@@ -12,16 +11,28 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductoServicio {
-    
+
     @Autowired
     private ProductoRepositorio productoRepositorio;
-    
+
     @Transactional
-    public void registrarProducto(Producto producto) throws ErrorServicio{
+    public void registrarProducto(Producto producto) throws ErrorServicio {
         validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
         validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
-        
+
         productoRepositorio.save(producto);
+    }
+
+    @Transactional
+    public void modificarProducto(Producto producto) throws ErrorServicio {
+        Producto respuesta = productoRepositorio.getById(producto.getId());
+        if (respuesta != null) {
+            validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
+            validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
+            productoRepositorio.save(producto);
+        } else {
+            throw new ErrorServicio("El producto no existe");
+        }
     }
 
     @Transactional
@@ -35,12 +46,16 @@ public class ProductoServicio {
     }
 
     @Transactional
-    public List<Producto> listAll() {
+    public List<Producto> findAll() {
+        //no encontramos el getAll como metodo de jpa y usamos el findAll de momento
         return productoRepositorio.findAll();
     }
-    
 
-    
+    @Transactional
+    public List<Producto> getById(String id) {
+        return (List<Producto>) productoRepositorio.getById(id);
+    }
+
     private void validar(String nombre, String codigo, String descripcion, String marca, String categoria) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
