@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.magicpet.petshop.repositorios.ProductoRepositorio;
 import com.magicpet.petshop.entidades.Producto;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,24 +42,22 @@ public class AdminController {
 
     @GetMapping("/productos")
     public String adminListProducto() {
-
         return "admin/producto-list";
     }
 
     @GetMapping("/productos/add")
     public String adminFormProducto() {
-
         return "admin/producto-form";
     }
 
-    @PostMapping("/productos/add")
-    public String adminSaveProducto(@PathVariable String id_producto, Model model, RedirectAttributes redirectAttributes) {
+    @PostMapping("/productos/add/{id_producto}")
+    public String adminSaveProducto(@PathVariable String id_producto, Model model, RedirectAttributes redirectAttributes,@ModelAttribute("producto") Producto producto) {
 
         try {
-            Producto producto = productoRepositorio.getById(id_producto);
-            if (producto == null) {
-                productoServicio.registrarProducto(producto);
-                return "redirect:";
+            Producto p = productoRepositorio.getById(id_producto);
+            if (p == null) {
+                productoServicio.registrarProducto(producto);   
+                return "redirect:/admin/productos";
             }
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
@@ -129,7 +128,7 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/admin/productos";
-        
+
     }
 
     @PostMapping("/productos/delete/{id_producto}")
@@ -143,7 +142,7 @@ public class AdminController {
             model.addAttribute("error", e.getMessage());
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
-        return "redirect:/admin/productos";//deberia ir a la lista despues de eliminar
+        return "redirect:/admin/productos";
     }
 
 }
