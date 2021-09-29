@@ -1,9 +1,6 @@
 package com.magicpet.petshop.entidades;
-<<<<<<< HEAD
 
 import com.magicpet.petshop.enums.Role;
-=======
->>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,7 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
-
 
 @Entity
 public class Usuario implements Serializable {
@@ -41,7 +37,7 @@ public class Usuario implements Serializable {
     public void setRol(Role rol) {
         this.rol = rol;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -98,9 +94,6 @@ public class Usuario implements Serializable {
         this.mail = mail;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     public String getDni() {
         return dni;
     }
@@ -108,22 +101,10 @@ public class Usuario implements Serializable {
     public void setDni(String dni) {
         this.dni = dni;
     }
->>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
-=======
+
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", mail=" + mail + '}';
-    }
->>>>>>> 9a65d1f089e09d30f7640cde7b56be6f61e0212a
-    
-<<<<<<< HEAD
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
     }
 
     public Integer getEdad() {
@@ -133,10 +114,4 @@ public class Usuario implements Serializable {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
-
-=======
->>>>>>> 9a65d1f089e09d30f7640cde7b56be6f61e0212a
-    
-    
->>>>>>> 625b1e1d64381ca6faa19530ace599fe45deed43
 }
