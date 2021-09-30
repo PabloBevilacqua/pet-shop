@@ -1,6 +1,5 @@
 package com.magicpet.petshop.Controller;
 
-import com.magicpet.petshop.entidades.Producto;
 import com.magicpet.petshop.repositorios.ProductoRepositorio;
 import com.magicpet.petshop.servicios.ProductoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
