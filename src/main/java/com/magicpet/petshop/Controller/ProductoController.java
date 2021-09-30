@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 /**
  *
  * @author Enzo sosa
@@ -27,14 +26,13 @@ public class ProductoController {
 
     @GetMapping("")
     private String listaProducto(Model model) {
-        model.addAttribute("producto", productoServicio.findAll());
+        model.addAttribute("productos", productoServicio.findAll());
         return "catalogo";
     }
 
     @GetMapping("/{id_producto}")
     public String vistaIdProducto(@PathVariable String id_producto, Model model) {
-        Producto producto = productoRepositorio.getById(id_producto);
-        //agregarlo al modelo y manejar el error si no encuentra producto (try catch)
+        model.addAttribute("producto", productoRepositorio.getById(id_producto));
         return "producto";
     }
 
