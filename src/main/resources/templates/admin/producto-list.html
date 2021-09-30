@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>hola</div>
-    </body>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Lista de productos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .error {
+            background-color: #c84a4a;
+            color: white;
+        }
+
+        .success {
+            background-color: #78f378;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/admin">Panel de administración</a>
+        <a href="/admin/productos">Lista de productos</a>
+        <a href="/admin/productos/add">Agregar producto</a>
+    </nav>
+
+    <main>
+        <h2>Lista de productos</h2>
+
+        <p th:if="${productos.isEmpty}">La lista de productos está vacía</p>
+
+        <div th:if="${error != null}" th:text="${error}" class="error"></div>
+        <div th:if="${success != null}" th:text="${success}" class="success"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Orden</th>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto, iterator : ${productos}">
+                    <td th:text="${iterator.index + 1}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <!-- <td th:text="${#numbers.formatCurrency(producto.precioUnitario)}"></td> -->
+                    <td th:text="${producto.precioUnitario}"></td>
+                    <td>
+                        <a th:href="@{'/admin/productos/edit/' + ${producto.id}}">Modificar</a>
+                        <a th:href="@{'/admin/productos/delete/' + ${producto.id}}">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+
 </html>
