@@ -55,10 +55,11 @@ public class AdminController {
             @ModelAttribute("producto") Producto producto) {
         try {
             productoServicio.registrarProducto(producto);
+            redirectAttributes.addFlashAttribute("success", "El producto se agregó exitosamente/correctamente.");
             return "redirect:/admin/productos";
         } catch (Exception e) {
             model.addAttribute("producto", producto);
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error", "No se pudo agregar el producto");
             return "admin/producto-form";
         }
     }

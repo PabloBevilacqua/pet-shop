@@ -2,6 +2,8 @@
 package com.magicpet.petshop.entidades;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,26 +12,38 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Producto implements Serializable {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
+    @Column(nullable = false)
     private String nombre;
+
     private String codigo;
+
+    @Column(nullable = false)
     private String descripcion;
+
     @ManyToOne
     private Marca marca;
+
     @ManyToOne
     private Categoria categoria;
+
     private Integer stock;
+
+    @Column(nullable = false)
     private Double precioUnitario;
+
     private String imagenURL;
 
     public Producto() {
     }
 
-    public Producto(String id, String nombre, String codigo, String descripcion, Marca marca, Categoria categoria, Integer stock, Double precioUnitario, String imagenURL) {
+    public Producto(String id, String nombre, String codigo, String descripcion, Marca marca, Categoria categoria,
+            Integer stock, Double precioUnitario, String imagenURL) {
         this.id = id;
         this.nombre = nombre;
         this.codigo = codigo;
@@ -115,10 +129,9 @@ public class Producto implements Serializable {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", descripcion=" + descripcion + ", marca=" + marca + ", categoria=" + categoria + ", stock=" + stock + ", precioUnitario=" + precioUnitario + ", imagenURL=" + imagenURL + '}';
+        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", descripcion=" + descripcion
+                + ", marca=" + marca + ", categoria=" + categoria + ", stock=" + stock + ", precioUnitario="
+                + precioUnitario + ", imagenURL=" + imagenURL + '}';
     }
 
-   
-    
-    
 }

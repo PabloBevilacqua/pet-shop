@@ -17,9 +17,6 @@ public class ProductoServicio {
 
     @Transactional
     public void registrarProducto(Producto producto) throws ErrorServicio {
-        validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
-        validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
-
         productoRepositorio.save(producto);
     }
 
@@ -27,8 +24,6 @@ public class ProductoServicio {
     public void modificarProducto(Producto producto) throws ErrorServicio {
         Producto respuesta = productoRepositorio.getById(producto.getId());
         if (respuesta != null) {
-            validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
-            validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
             productoRepositorio.save(producto);
         } else {
             throw new ErrorServicio("El producto no existe");
@@ -37,26 +32,26 @@ public class ProductoServicio {
 
     @Transactional
     public void eliminarProducto(String id) throws ErrorServicio {
-
         Optional<Producto> respuesta = productoRepositorio.findById(id);
         if (respuesta.isPresent()) {
             productoRepositorio.delete(respuesta.get());
+        } else {
+            throw new ErrorServicio("No se encontró el producto");
         }
-        throw new ErrorServicio("No se encontró el producto");
     }
 
     @Transactional
     public List<Producto> findAll() {
-        //no encontramos el getAll como metodo de jpa y usamos el findAll de momento
         return productoRepositorio.findAll();
     }
 
     @Transactional
-    public List<Producto> getById(String id) {
-        return (List<Producto>) productoRepositorio.getById(id);
+    public Producto getById(String id) {
+        return productoRepositorio.getById(id);
     }
 
-    private void validar(String nombre, String codigo, String descripcion, String marca, String categoria) throws ErrorServicio {
+    private void validar(String nombre, String codigo, String descripcion, String marca, String categoria)
+            throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");
