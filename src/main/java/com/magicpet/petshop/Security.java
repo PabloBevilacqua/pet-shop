@@ -1,5 +1,6 @@
 package com.magicpet.petshop;
 
+import static com.magicpet.petshop.enums.Role.ADMIN;
 import com.magicpet.petshop.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +43,7 @@ public class Security extends WebSecurityConfigurerAdapter{
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .and().csrf().disable();
+                //.and().antMatchers("/admin").hasRole(ADMIN);
 
                 
         
