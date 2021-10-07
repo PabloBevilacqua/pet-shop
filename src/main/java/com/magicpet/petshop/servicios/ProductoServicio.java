@@ -1,4 +1,3 @@
-
 package com.magicpet.petshop.servicios;
 
 import com.magicpet.petshop.entidades.Producto;
@@ -12,15 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductoServicio {
-    
+
     @Autowired
     private ProductoRepositorio productoRepositorio;
-    
+
     @Transactional
-    public void registrarProducto(Producto producto) throws ErrorServicio{
-        validar(producto.getNombre(), producto.getCodigo(), producto.getDescripcion(), producto.getMarca().getNombre(), producto.getCategoria().getNombre());
-        validar2(producto.getStock(), producto.getPrecioUnitario(), producto.getImagenURL());
-        
+    public void registrarProducto(Producto producto) throws ErrorServicio {
         productoRepositorio.save(producto);
     }
     
@@ -37,23 +33,37 @@ public class ProductoServicio {
     }
 
     @Transactional
-    public void eliminarProducto(String id) throws ErrorServicio {
-
-        Optional<Producto> respuesta = productoRepositorio.findById(id);
-        if (respuesta.isPresent()) {
-            productoRepositorio.delete(respuesta.get());
+    public void modificarProducto(Producto producto) throws ErrorServicio {
+        Producto respuesta = productoRepositorio.getById(producto.getId());
+        if (respuesta != null) {
+            productoRepositorio.save(producto);
+        } else {
+            throw new ErrorServicio("El producto no existe");
         }
-        throw new ErrorServicio("No se encontró el producto");
     }
 
     @Transactional
-    public List<Producto> listAll() {
+    public void eliminarProducto(String id) throws ErrorServicio {
+        Optional<Producto> respuesta = productoRepositorio.findById(id);
+        if (respuesta.isPresent()) {
+            productoRepositorio.delete(respuesta.get());
+        } else {
+            throw new ErrorServicio("No se encontró el producto");
+        }
+    }
+
+    @Transactional
+    public List<Producto> findAll() {
         return productoRepositorio.findAll();
     }
-    
 
-    
-    private void validar(String nombre, String codigo, String descripcion, String marca, String categoria) throws ErrorServicio {
+    @Transactional
+    public Producto getById(String id) {
+        return productoRepositorio.getById(id);
+    }
+
+    private void validar(String nombre, String codigo, String descripcion, String marca, String categoria)
+            throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new ErrorServicio("El nombre no puede ser nulo");

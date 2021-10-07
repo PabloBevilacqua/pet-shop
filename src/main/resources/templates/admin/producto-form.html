@@ -1,16 +1,48 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Formulario producto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .error {
+            background-color: #c84a4a;
+            color: white;
+        }
+
+        .success {
+            background-color: #78f378;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="/admin">Panel de administración</a>
+        <a href="/admin/productos">Lista de productos</a>
+        <a href="/admin/productos/add">Agregar producto</a>
+    </nav>
+
+    <main>
+        <h2>Formulario</h2>
+
+        <form th:action="${action}" method="POST" th:object="${producto}">
+            <input type="hidden" name="id" th:value="*{id}" placeholder="Id" />
+            <input type="text" name="nombre" th:value="*{nombre}" placeholder="Nombre del producto" />
+            <input type="text" name="descripcion" th:value="*{descripcion}" placeholder="Descripcion del producto" />
+            <input type="number" name="precioUnitario" th:value="*{precioUnitario}" placeholder="Precio del producto" />
+            <!-- <input type="number" name="stock" th:value="*{stock}" placeholder="Stock del producto" />
+            <input type="number" name="marca" th:value="*{marca.id}" placeholder="Marca" />
+            <input type="number" name="categoria" th:value="*{categoria.id}" placeholder="Categoria" /> -->
+
+            <div th:if="${error != null}" th:text="${error}" class="error"></div>
+
+            <button type="submit">Agregar producto</button>
+        </form>
+    </main>
+
+</body>
+
 </html>
