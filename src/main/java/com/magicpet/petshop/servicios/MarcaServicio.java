@@ -20,14 +20,10 @@ public class MarcaServicio {
         validar(marca.getNombre());
         marcaRepositorio.save(marca);
     }
-<<<<<<< HEAD
-    @Transactional
-    public void modificarMarca(Marca marca) throws ErrorServicio{
-=======
 
     @Transactional
     public void modificarMarca(Marca marca) throws ErrorServicio {
->>>>>>> 244e7359c7ab95104903d10a20d82d6beb7d13fe
+
         Optional<Marca> respuesta = marcaRepositorio.findById(marca.getId());
         if (respuesta.isPresent()) {
             validar(marca.getNombre());
@@ -36,12 +32,8 @@ public class MarcaServicio {
             throw new ErrorServicio("La marca no existe");
         }
     }
-<<<<<<< HEAD
-      @Transactional
-=======
 
     @Transactional
->>>>>>> 244e7359c7ab95104903d10a20d82d6beb7d13fe
     public void eliminarMarca(String id) throws ErrorServicio {
 
         Optional<Marca> respuesta = marcaRepositorio.findById(id);
