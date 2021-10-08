@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.magicpet.petshop.entidades.Producto;
+import com.magicpet.petshop.errores.ErrorServicio;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -57,7 +58,7 @@ public class AdminController {
             productoServicio.registrarProducto(producto);
             redirectAttributes.addFlashAttribute("success", "El producto se agregó exitosamente/correctamente.");
             return "redirect:/admin/productos";
-        } catch (Exception e) {
+        } catch (ErrorServicio e) {
             model.addAttribute("producto", producto);
             model.addAttribute("error", "No se pudo agregar el producto");
             return "admin/producto-form";
@@ -90,7 +91,7 @@ public class AdminController {
         try {
             productoServicio.modificarProducto(producto);
             redirectAttributes.addFlashAttribute("success", "El producto se modificó correctamente");
-        } catch (Exception e) {
+        } catch (ErrorServicio e) {
             System.out.println(e.getCause());
             model.addAttribute("error", e.getMessage());
             model.addAttribute("producto", producto);
@@ -105,7 +106,7 @@ public class AdminController {
         try {
             productoServicio.eliminarProducto(id_producto);
             redirectAttributes.addFlashAttribute("success", "El producto se eliminó correctamente");
-        } catch (Exception e) {
+        } catch (ErrorServicio e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
         return "redirect:/admin/productos";

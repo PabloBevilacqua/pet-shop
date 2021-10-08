@@ -23,6 +23,7 @@ public class MarcaServicio {
 
     @Transactional
     public void modificarMarca(Marca marca) throws ErrorServicio {
+
         Optional<Marca> respuesta = marcaRepositorio.findById(marca.getId());
         if (respuesta.isPresent()) {
             validar(marca.getNombre());
