@@ -2,6 +2,7 @@ package com.magicpet.petshop.entidades;
 
 import com.magicpet.petshop.enums.Role;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,7 +19,7 @@ public class Usuario implements Serializable {
     private String id;
     private String nombre;
     private String apellido;
-    private Integer edad;
+    private Date fechaDeNacimiento;
     private String dni;
     private String ciudad;
     private String mail;
@@ -102,16 +103,17 @@ public class Usuario implements Serializable {
         this.dni = dni;
     }
 
-    @Override
+    public Date getFechaDeNacimiento() {
+        return fechaDeNacimiento;
+    }
+
+    public void setFechaDeNacimiento(Date fechaDeNacimiento) {
+        this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+
+  @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", mail=" + mail + '}';
     }
 
-    public Integer getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
 }

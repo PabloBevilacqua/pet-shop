@@ -1,5 +1,6 @@
 package com.magicpet.petshop;
 
+import com.magicpet.petshop.service.UsuarioService;
 import com.magicpet.petshop.servicios.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,28 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     // Configuracion de las peticiones http
     @Override
+    public void configure(HttpSecurity http) throws Exception{
+        
+        http.authorizeRequests().antMatchers("/css/*","/img/*","/js/*").permitAll()
+                .and().formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                .loginProcessingUrl("/logincheck")
+                .failureUrl("/login?error=error")
+                .permitAll()
+                .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .and().csrf().disable();
+
     public void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests().antMatchers("/css/*", "/img/*", "/js/*").permitAll().and().formLogin()
                 .loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
                 .loginProcessingUrl("/logincheck").failureUrl("/login?error=error").permitAll().and().logout()
                 .logoutUrl("/logout").logoutSuccessUrl("/login?logout").and().csrf().disable();
-
     }
 
 }
