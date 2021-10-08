@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 public class Usuario implements Serializable {
 
@@ -96,8 +95,6 @@ public class Usuario implements Serializable {
         this.mail = mail;
     }
 
-  
- 
     public String getDni() {
         return dni;
     }
@@ -114,9 +111,9 @@ public class Usuario implements Serializable {
         this.fechaDeNacimiento = fechaDeNacimiento;
     }
 
-   
   @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", mail=" + mail + '}';
     }
+
 }
