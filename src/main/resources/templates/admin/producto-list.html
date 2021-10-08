@@ -5,59 +5,57 @@
     <title>Lista de productos</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .error {
-            background-color: #c84a4a;
-            color: white;
-        }
-
-        .success {
-            background-color: #78f378;
-            color: black;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
-    <nav>
-        <a href="/admin">Panel de administración</a>
-        <a href="/admin/productos">Lista de productos</a>
-        <a href="/admin/productos/add">Agregar producto</a>
-    </nav>
+    <div th:insert="/fragmentos/nav :: nav-logadmin"></div>
 
-    <main>
-        <h2>Lista de productos</h2>
+    <main class="bg-amarillo">
+        <section class="container">
+            <h2>Productos</h2>
 
-        <p th:if="${productos.isEmpty}">La lista de productos está vacía</p>
+            <a href="/admin/productos/add" class="btn primary right">Agregar producto</a>
 
-        <div th:if="${error != null}" th:text="${error}" class="error"></div>
-        <div th:if="${success != null}" th:text="${success}" class="success"></div>
+            <p th:if="${productos.isEmpty}" class="message error">La lista de productos está vacía</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Orden</th>
-                    <th>Producto</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="producto, iterator : ${productos}">
-                    <td th:text="${iterator.index + 1}"></td>
-                    <td th:text="${producto.nombre}"></td>
-                    <td th:text="${producto.descripcion}"></td>
-                    <!-- <td th:text="${#numbers.formatCurrency(producto.precioUnitario)}"></td> -->
-                    <td th:text="${producto.precioUnitario}"></td>
-                    <td>
-                        <a th:href="@{'/admin/productos/edit/' + ${producto.id}}">Modificar</a>
-                        <a th:href="@{'/admin/productos/delete/' + ${producto.id}}">Eliminar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <p th:if="${error != null}" th:text="${error}" class="message error">Hubo un error</p>
+            <p th:if="${success != null}" th:text="${success}" class="message success">El proceso se realizó con éxito
+            </p>
+
+            <table th:if="${!productos.isEmpty}">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Producto</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="producto, iterator : ${productos}">
+                        <td th:text="${iterator.index + 1}">01</td>
+                        <td th:text="${producto.nombre}">PLACEHOLDER</td>
+                        <td th:text="${producto.descripcion}">PLACEHOLDER</td>
+                        <!-- <td th:text="${#numbers.formatCurrency(producto.precioUnitario)}"></td> -->
+                        <td th:text="${producto.precioUnitario}">PLACEHOLDER</td>
+                        <td>
+                            <a alt="Editar" class="actions green"
+                                th:href="@{'/admin/productos/edit/' + ${producto.id}}"><i
+                                    class="bi bi-pencil-fill"></i></a>
+                            <a alt="Eliminar" class="actions red"
+                                th:href="@{'/admin/productos/delete/' + ${producto.id}}"><i
+                                    class="bi bi-trash-fill"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </main>
+
+    <div th:insert="/fragmentos/footer :: footer"></div>
 </body>
 
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+</head>
+
+<body>
+    <div th:insert="/fragmentos/nav :: nav-nolog"></div>
+
+    <main class="bg-agua">
+        <section class="container forms">
+            <h1>Magic and Strange Pet Shop!</h1>
+            <form action="/login" method="POST">
+                <h2>Login</h2>
+                <label for="username">Usuario</label>
+                <input type="text" name="username" placeholder="email@example.com">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" placeholder="Ingrese contraseña">
+                <input type="submit" class="btn primary" value="Ingresar">
+            </form>
+
+            <form class="form-registrar" action="/register" method="POST">
+                <h2>Registro</h2>
+                <label for="username">Usuario</label>
+                <input type="text" name="username" placeholder="email@example.com">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" placeholder="Ingrese contraseña">
+                <input type="submit" class="btn register" value="Registrar">
+            </form>
+        </section>
+    </main>
+
+    <div th:insert="/fragmentos/footer :: footer"></div>
+</body>
+
+</html>

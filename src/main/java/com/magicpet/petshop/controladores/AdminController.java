@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author Enzo sosa
  */
 @Controller
-@PreAuthorize("hasRole('ADMIN')") // Si son varios hasAnyRole('ROLE1','ROLE2')
+//@PreAuthorize("hasRole('ADMIN')") // Si son varios hasAnyRole('ROLE1','ROLE2')
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -47,6 +47,7 @@ public class AdminController {
     @GetMapping("/productos/add")
     public String adminFormProducto(Model model, @ModelAttribute("producto") Producto producto) {
         model.addAttribute("action", "/admin/productos/add");
+        model.addAttribute("titulo", "Agregar producto");
         return "admin/producto-form";
     }
 
@@ -81,6 +82,7 @@ public class AdminController {
         }
 
         model.addAttribute("action", "/admin/productos/edit/" + id_producto);
+        model.addAttribute("titulo", "Modificar producto");
         return "admin/producto-form";
     }
 

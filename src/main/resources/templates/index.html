@@ -1,16 +1,4 @@
 <!DOCTYPE html>
-
-<html lang="es" xmlns:th="https://www.thymeleaf.org">
-    <head>
-        <title>hola</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>hola</div>
-    </body>
-</html>
-
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -18,21 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
-    <title>Magic Pet!</title>
+    <title>Magic and Strange Pet Shop!</title>
 </head>
 
 <body>
-    <h1>Magic Pet!</h1>
+    <div th:insert="/fragmentos/nav :: nav-nolog"></div>
 
-    <nav>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/about">Sobre nosotros</a></li>
-        <li><a href="/contact">Contacto</a></li>
-    </nav>
+    <main class="bg-agua">
+        <section class="container">
+            <h1>Magic and Strange Pet Shop!</h1>
+            <div class="left">
+                <img src="/img/icons/bola.png" alt="bola de cristal"><br>
+                <!-- <img src="/img/icons/varita.png" alt="varita mágica">
+                <img src="/img/icons/sombrero.png" alt="sombrero de mago"> -->
+            </div>
+            <div class="right">
+                <p class="medium">Lorem ipsum dolor sit amet,<br> dadipisicing elit.</p>
+                <a class="btn primary" href="/productos">Ver catálogo</a>
+            </div>
+        </section>
+    </main>
 
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Adipisci, commodi ducimus. Dignissimos voluptatum
-        facilis possimus veritatis a, laudantium fugiat et, in nesciunt labore commodi? Facere ipsum inventore beatae
-        voluptatibus tempore.</p>
+    <section>
+
+    </section>
+
+    <div th:insert="/fragmentos/footer :: footer"></div>
 </body>
 
 </html>

@@ -12,13 +12,8 @@ public class MainController {
         return "index";
     }
     
-    @GetMapping("/about")
-    public String getAbout() {
-        return "about";
-    }
-    
-    @GetMapping("/contact")
-    public String getContact() {
-        return "contact";
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
     }
 }

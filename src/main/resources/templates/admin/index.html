@@ -5,14 +5,23 @@
     <title>Panel de administración</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/admin.css">
 </head>
 
 <body>
-    <nav>
-        <a href="/admin">Panel de administración</a>
-        <a href="/admin/productos">Lista de productos</a>
-        <a href="/admin/productos/add">Agregar producto</a>
-    </nav>
+    <div th:insert="/fragmentos/nav :: nav-logadmin"></div>
+
+    <main>
+        <h1>Panel de administración</h1>
+
+        <ul>
+            <li><a href="/admin/productos">Productos</a></li>
+            <li><a href="/admin/usuarios">Usuarios</a></li>
+        </ul>
+    </main>
+
+    <div th:insert="/fragmentos/footer :: footer"></div>
 </body>
 
 </html>
