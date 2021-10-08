@@ -41,13 +41,5 @@ public class Security extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .and().csrf().disable();
-
-    public void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests().antMatchers("/css/*", "/img/*", "/js/*").permitAll().and().formLogin()
-                .loginPage("/login").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/")
-                .loginProcessingUrl("/logincheck").failureUrl("/login?error=error").permitAll().and().logout()
-                .logoutUrl("/logout").logoutSuccessUrl("/login?logout").and().csrf().disable();
     }
-
 }
