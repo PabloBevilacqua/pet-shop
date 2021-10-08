@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:insert="/fragmentos/nav :: nav-logadmin"></div>
+    <nav th:replace="/fragmentos/nav :: nav-logadmin"></nav>
 
     <main>
         <h1>Panel de administración</h1>
@@ -21,7 +21,7 @@
         </ul>
     </main>
 
-    <div th:insert="/fragmentos/footer :: footer"></div>
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
 </body>
 
 </html>

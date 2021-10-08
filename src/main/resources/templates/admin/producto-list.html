@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:insert="/fragmentos/nav :: nav-logadmin"></div>
+    <nav th:replace="/fragmentos/nav :: nav-logadmin"></nav>
 
     <main class="bg-amarillo">
         <section class="container">
@@ -55,7 +55,7 @@
         </section>
     </main>
 
-    <div th:insert="/fragmentos/footer :: footer"></div>
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
 </body>
 
 </html>

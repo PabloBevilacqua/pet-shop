@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div th:insert="/fragmentos/nav :: nav-nolog"></div>
+    <nav th:replace="/fragmentos/nav :: nav-nolog"></nav>
 
     <main class="bg-agua">
         <section class="container">
@@ -31,7 +31,7 @@
 
     </section>
 
-    <div th:insert="/fragmentos/footer :: footer"></div>
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
 </body>
 
 </html>
