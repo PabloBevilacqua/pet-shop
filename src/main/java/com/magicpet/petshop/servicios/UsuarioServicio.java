@@ -5,6 +5,7 @@ import com.magicpet.petshop.enums.Role;
 import com.magicpet.petshop.errores.ErrorServicio;
 import com.magicpet.petshop.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UsuarioServicio implements UserDetailsService {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Transactional
-    public Usuario save(String username, String password, String password2, String mail, String ciudad, String nombre, String apellido, String dni, Integer edad) throws ErrorServicio {
+    public Usuario save(String username, String password, String password2, String mail, String ciudad, String nombre, String apellido, String dni, Date fechaDeNacimiento) throws ErrorServicio {
 
         if (mail == null || mail.isEmpty()) {
             throw new ErrorServicio("El dni de usuario no puede estar vacio");
@@ -42,8 +43,8 @@ public class UsuarioServicio implements UserDetailsService {
         if (dni == null || dni.isEmpty()) {
             throw new ErrorServicio("El dni  no puede estar Vacio");
         }
-        if (edad == null || edad <= 8) {
-            throw new ErrorServicio("La Edad  no puede estar Vacia, o ser menor a 8");
+        if (fechaDeNacimiento == null) {
+            throw new ErrorServicio("La fecha de nacimiento no puede estar vacia");
         }
        
         if (username.isEmpty() || username == null) {

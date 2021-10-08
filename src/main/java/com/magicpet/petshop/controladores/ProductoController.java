@@ -1,4 +1,4 @@
-package com.magicpet.petshop.Controller;
+package com.magicpet.petshop.controladores;
 
 import com.magicpet.petshop.repositorios.ProductoRepositorio;
 import com.magicpet.petshop.servicios.ProductoServicio;

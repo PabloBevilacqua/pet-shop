@@ -1,4 +1,4 @@
-package com.magicpet.petshop.controllers;
+package com.magicpet.petshop.controladores;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

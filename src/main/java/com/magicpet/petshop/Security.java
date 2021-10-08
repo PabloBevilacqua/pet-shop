@@ -1,7 +1,6 @@
 package com.magicpet.petshop;
 
-import com.magicpet.petshop.service.UsuarioService;
-import com.magicpet.petshop.servicios.UsuarioService;
+import com.magicpet.petshop.servicios.UsuarioServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -17,11 +16,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class Security extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioServicio usuarioServicio;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usuarioService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(usuarioServicio).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     // Configuracion de las peticiones http

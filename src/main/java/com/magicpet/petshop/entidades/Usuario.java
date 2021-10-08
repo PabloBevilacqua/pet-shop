@@ -8,6 +8,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -17,14 +18,24 @@ public class Usuario implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    
     private String nombre;
+    
     private String apellido;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDeNacimiento;
+    
     private String dni;
+    
     private String ciudad;
+    
     private String mail;
+    
     private String username;
+    
     private String password;
+    
     @Enumerated(EnumType.STRING)
     private Role rol;
 
