@@ -3,6 +3,7 @@ package com.magicpet.petshop.entidades;
 import com.magicpet.petshop.enums.Role;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +20,18 @@ public class Usuario implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     
+    @Column(nullable = false, unique = true)
+    private String username;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(nullable = false, unique = true)
+    private String mail;
+    
+    @Enumerated(EnumType.STRING)
+    private Role rol;
+    
     private String nombre;
     
     private String apellido;
@@ -29,15 +42,6 @@ public class Usuario implements Serializable {
     private String dni;
     
     private String ciudad;
-    
-    private String mail;
-    
-    private String username;
-    
-    private String password;
-    
-    @Enumerated(EnumType.STRING)
-    private Role rol;
 
     public Usuario() {
     }

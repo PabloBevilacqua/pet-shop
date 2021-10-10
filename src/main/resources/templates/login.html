@@ -15,23 +15,37 @@
     <main class="bg-agua">
         <section class="container forms">
             <h1>Magic and Strange Pet Shop!</h1>
-            <form action="/login" method="POST">
+
+            <form action="/login" method="POST" th:object="${usuario}">
                 <h2>Login</h2>
                 <label for="username">Usuario</label>
-                <input type="text" name="username" placeholder="email@example.com">
+                <input type="text" name="username" placeholder="Javi">
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" placeholder="Ingrese contraseña">
                 <input type="submit" class="btn primary" value="Ingresar">
+                <p><a href="/reset-password">Olvidé mi contraseña</a></p>
             </form>
 
-            <form class="form-registrar" action="/register" method="POST">
+            <form class="form-registrar" action="/register" method="POST" th:object="${usuario}">
                 <h2>Registro</h2>
+
                 <label for="username">Usuario</label>
-                <input type="text" name="username" placeholder="email@example.com">
+                <input type="text" name="username" placeholder="Pedro">
+
                 <label for="password">Contraseña</label>
                 <input type="password" name="password" placeholder="Ingrese contraseña">
+
+                <label for="confirmPassword">Confirmación de contraseña</label>
+                <input type="password" name="confirmPassword" placeholder="Ingrese nuevamente la contraseña">
+
+                <label for="mail">Correo electrónico</label>
+                <input type="email" name="mail" placeholder="pedrito@copado.com">
+
                 <input type="submit" class="btn register" value="Registrar">
             </form>
+
+            <p th:if="${error != null}" class="error message">Hubo un error al intentar procesar.</p>
+            <p th:if="${logout != null}" class="success message">Se desconectó correctamente</p>
         </section>
     </main>
 

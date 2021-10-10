@@ -25,20 +25,22 @@ public class Security extends WebSecurityConfigurerAdapter {
 
     // Configuracion de las peticiones http
     @Override
-    public void configure(HttpSecurity http) throws Exception{
+    public void configure(HttpSecurity http) throws Exception {
         
-        http.authorizeRequests().antMatchers("/css/*","/img/*","/js/*").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/css/*","/img/*","/js/*")
+                    .permitAll()
                 .and().formLogin()
-                .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/")
-                .loginProcessingUrl("/logincheck")
-                .failureUrl("/login?error=error")
-                .permitAll()
+                    .loginPage("/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/productos")
+                    .failureUrl("/login?error=1")
+                    .permitAll()
                 .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login?logout=1")
                 .and().csrf().disable();
     }
 }
