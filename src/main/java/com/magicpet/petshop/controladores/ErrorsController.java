@@ -32,6 +32,7 @@ public class ErrorsController implements ErrorController {
                 errorMessage = "Hubo un problema.";
                 break;
         }
+        model.addAttribute("errorCodigo", "Error [" + codigoError + "]");
         model.addAttribute("error", errorMessage);
         return "error";
     }

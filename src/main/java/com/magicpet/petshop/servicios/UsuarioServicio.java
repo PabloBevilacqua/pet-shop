@@ -5,10 +5,9 @@ import com.magicpet.petshop.enums.Role;
 import com.magicpet.petshop.errores.ErrorServicio;
 import com.magicpet.petshop.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import javax.transaction.Transactional;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,7 +30,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     public Usuario buscarPorId(String id) {
-        return usuarioRepositorio.getById(id);
+        Usuario usuario = usuarioRepositorio.getById(id);
+        return usuario;
     }
     
     @Transactional
@@ -39,20 +39,20 @@ public class UsuarioServicio implements UserDetailsService {
         checkPasswordConfirmation(password, confirmPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         
-        Usuario usuario = new Usuario();
-        usuario.setRol(Role.USER);
-        usuario.setMail(mail);
-        usuario.setUsername(username);
-        usuario.setPassword(encoder.encode(usuario.getPassword()));
-        
-        if (esValido(usuario)) {
-            try {
+        try {
+            Usuario usuario = new Usuario();
+            usuario.setRol(Role.USER);
+            usuario.setMail(mail);
+            usuario.setUsername(username);
+            usuario.setPassword(encoder.encode(password));
+            if (esValido(usuario)) {
                 usuarioRepositorio.save(usuario);
-            } catch (Exception e) {
-                throw new ErrorServicio("Hubo un error al crear el usuario");
+                return usuario;
             }
+        } catch (Exception e) {
+            throw new ErrorServicio("Hubo un error al crear el usuario");
         }
-        return usuario;
+        return null;
     }
     
     @Transactional

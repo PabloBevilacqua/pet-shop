@@ -1,7 +1,5 @@
 package com.magicpet.petshop.controladores;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,11 +39,13 @@ public class AdminUsuarioController {
         model.addAttribute("roles", Role.values());
         model.addAttribute("action", "/admin/usuarios/add");
         model.addAttribute("titulo", "Agregar usuario");
+        model.addAttribute("password", true);
         return "admin/usuario-form";
     }
 
     @PostMapping("/add")
-    public String postAdd(Model model, RedirectAttributes redirectAttributes,
+    public String postAdd(Model model,
+            RedirectAttributes redirectAttributes,
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String confirmPassword,
@@ -62,12 +62,13 @@ public class AdminUsuarioController {
             redirectAttributes.addFlashAttribute("success", "Se creó un usuario de manera exitosa.");
             return "redirect:/admin/usuarios";
         } catch (Exception e) {
-            model.addAttribute("action", "/admin/usuarios/add");
-            model.addAttribute("titulo", "Agregar usuario");
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("roles", Role.values());
-            model.addAttribute("usuario", usuario);
-            return "admin/usuario-form";
+            redirectAttributes.addFlashAttribute("action", "/admin/usuarios/add");
+            redirectAttributes.addFlashAttribute("titulo", "Agregar usuario");
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            redirectAttributes.addFlashAttribute("roles", Role.values());
+            redirectAttributes.addFlashAttribute("usuario", usuario);
+            redirectAttributes.addFlashAttribute("password", true);
+            return "redirect:/admin/usuarios/add";
         }
     }
 
@@ -87,24 +88,39 @@ public class AdminUsuarioController {
             return "redirect:/admin/usuarios";
         }
 
-        model.addAttribute("roles", Role.values());
         model.addAttribute("action", "/admin/usuarios/edit/" + id);
         model.addAttribute("titulo", "Modificar usuario");
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("password", false);
         return "admin/usuario-form";
     }
 
     @PostMapping("/edit/{id}")
     public String postEdit(@PathVariable String id, Model model,
-            RedirectAttributes redirectAttributes, @ModelAttribute("usuario") Usuario usuario) {
+            RedirectAttributes redirectAttributes,
+            @RequestParam String username,
+            @RequestParam String mail,
+            @RequestParam Role rol) {
+
+        Usuario usuario = usuarioServicio.buscarPorId(id);
+        if (usuario == null) {
+            redirectAttributes.addFlashAttribute("error", "El usuario no existe");
+            return "redirect/admin/usuarios";
+        }
         try {
+            
+            usuario.setMail(mail);
+            usuario.setUsername(username);
+            usuario.setRol(rol);
             usuarioServicio.modificar(usuario);
             redirectAttributes.addFlashAttribute("success", "El usuario se modificó correctamente.");
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("roles", Role.values());
-            model.addAttribute("usuario", usuario);
-            model.addAttribute("action", "/admin/usuarios/edit/" + id);
-            return "admin/usuario-password-form";
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            redirectAttributes.addFlashAttribute("action", "/admin/usuarios/edit/" + id);
+            redirectAttributes.addFlashAttribute("roles", Role.values());
+            redirectAttributes.addFlashAttribute("usuario", usuario);
+            redirectAttributes.addFlashAttribute("password", false);
+            return "redirect:/admin/usuarios/edit/" + id;
         }
         return "redirect:/admin/usuarios";
     }
@@ -118,7 +134,8 @@ public class AdminUsuarioController {
                 redirectAttributes.addFlashAttribute("error", "El usuario solicitado no existe.");
                 return "redirect:/admin/usuarios";
             } else {
-                model.addAttribute("usuario", usuario);
+                model.addAttribute("id", id);
+                model.addAttribute("action", "/admin/usuarios/password/" + id);
             }
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
@@ -137,6 +154,7 @@ public class AdminUsuarioController {
             redirectAttributes.addFlashAttribute("success", "La contraseña se modificó correctamente.");
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
+            model.addAttribute("id", id);
             model.addAttribute("action", "/admin/usuarios/password/" + id);
             return "admin/usuario-password-form";
         }

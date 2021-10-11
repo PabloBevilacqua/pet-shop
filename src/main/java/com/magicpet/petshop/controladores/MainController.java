@@ -37,7 +37,7 @@ public class MainController {
     }
     
     @PostMapping("/register")
-    public String postRegister(Model model, RedirectAttributes redirectAttributes,
+    public String postRegister(RedirectAttributes redirectAttributes,
             @RequestParam String username,
             @RequestParam String password,
             @RequestParam String confirmPassword,
@@ -45,8 +45,8 @@ public class MainController {
         try {
             usuarioServicio.nuevoRegistro(username, password, confirmPassword, mail);
         } catch (Exception e) {
-            model.addAttribute(e.getMessage());
-            return "login";
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/login";
         }
         redirectAttributes.addFlashAttribute("success", "Se registró correctamente.");
         return "redirect:/login";
