@@ -12,7 +12,7 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect      
+        dialect: org.hibernate.dialect.MySQL8Dialect
 #Que thymeleaf no guarde datos en cache
   thymeleaf:
     cache: false 
