@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav th:replace="/fragmentos/nav :: nav-nolog"></nav>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
 
     <main class="bg-agua">
         <section class="container forms">
@@ -44,7 +44,9 @@
                 <input type="submit" class="btn register" value="Registrar">
             </form>
 
-            <p th:if="${error != null}" class="error message">Hubo un error al intentar procesar.</p>
+            <p th:if="${error != null}" th:text="${error}" class="error message"></p>
+            <p th:if="${success != null}" th:text="${success}" class="success message"></p>
+
             <p th:if="${logout != null}" class="success message">Se desconectó correctamente</p>
         </section>
     </main>

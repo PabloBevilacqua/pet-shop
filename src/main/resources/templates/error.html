@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <nav th:replace="/fragmentos/nav :: nav-nolog"></nav>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
 
     <main class="bg-agua">
         <section class="container">
-            <h2>Error</h2>
+            <h2 th:text="${errorCodigo}"></h2>
 
             <p th:text="${error}" class="message error">Hubo un error</p>
         </section>

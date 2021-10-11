@@ -1,12 +1,10 @@
-<nav th:fragment="nav-nolog">
+<nav th:fragment="nav">
     <li><a href="/">Inicio</a></li>
     <li><a href="/productos">Catálogo</a></li>
-    <li><a href="/login" class="btn secondary">Ingresar</a></li>
-</nav>
-
-<nav th:fragment="nav-logadmin">
-    <li><a href="/">Inicio</a></li>
-    <li><a href="/productos">Catálogo</a></li>
-    <li><a href="/admin">Panel del Admin</a></li>
-    <li><a href="/logout" class="btn secondary">Salir</a></li>
+    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">Panel de Admin</a></li>
+    <li sec:authorize="isAuthenticated()"><i class="bi bi-person-fill"> </i><a sec:authentication="name"
+            href="/profile">
+            Username</a></i></li>
+    <li sec:authorize="!isAuthenticated()"><a href="/login" class="btn secondary">Ingresar</a></li>
+    <li sec:authorize="isAuthenticated()"><a href="/logout" class="btn secondary">Salir</a></li>
 </nav>
