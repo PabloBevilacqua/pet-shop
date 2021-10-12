@@ -1,5 +1,6 @@
 package com.magicpet.petshop.servicios;
 
+import com.magicpet.petshop.entidades.Imagen;
 import com.magicpet.petshop.entidades.Producto;
 import com.magicpet.petshop.errores.ErrorServicio;
 import com.magicpet.petshop.repositorios.ProductoRepositorio;
@@ -8,15 +9,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ProductoServicio {
 
     @Autowired
     private ProductoRepositorio productoRepositorio;
+    
+    @Autowired
+    private ImagenServicio imagenServicio;
 
     @Transactional
-    public void registrarProducto(Producto producto) throws ErrorServicio {
+    public void registrarProducto(Producto producto, MultipartFile archivo) throws ErrorServicio {
+        
+        Imagen imagen = imagenServicio.guardar(archivo);
+        producto.setImagen(imagen);
+        
         productoRepositorio.save(producto);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.magicpet.petshop.entidades.Producto;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -41,6 +42,7 @@ public class AdminProductoController {
 
     @GetMapping("/add")
     public String adminFormProducto(Model model, @ModelAttribute("producto") Producto producto) {
+        
         model.addAttribute("action", "/admin/productos/add");
         model.addAttribute("titulo", "Agregar producto");
         return "admin/producto-form";
@@ -48,9 +50,10 @@ public class AdminProductoController {
 
     @PostMapping("/add")
     public String adminSaveProducto(Model model, RedirectAttributes redirectAttributes,
-            @ModelAttribute("producto") Producto producto) {
+            @ModelAttribute("producto") Producto producto,
+            MultipartFile archivo) {
         try {
-            productoServicio.registrarProducto(producto);
+            productoServicio.registrarProducto(producto, archivo);
             redirectAttributes.addFlashAttribute("success", "El producto se agregó exitosamente/correctamente.");
             return "redirect:/admin/productos";
         } catch (Exception e) {
@@ -68,9 +71,8 @@ public class AdminProductoController {
             if (producto == null) {
                 redirectAttributes.addFlashAttribute("error", "El producto solicitado no existe");
                 return "redirect:/admin/productos";
-            } else {
-                model.addAttribute("producto", producto);
             }
+            model.addAttribute("producto", producto);
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/admin/productos";
@@ -88,7 +90,7 @@ public class AdminProductoController {
             productoServicio.modificarProducto(producto);
             redirectAttributes.addFlashAttribute("success", "El producto se modificó correctamente");
         } catch (Exception e) {
-            System.out.println(e.getCause());
+            model.addAttribute("titulo", "Modificar producto");
             model.addAttribute("error", e.getMessage());
             model.addAttribute("producto", producto);
             model.addAttribute("action", "/admin/productos/edit/" + id_producto);

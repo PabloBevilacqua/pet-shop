@@ -16,7 +16,7 @@ public class ErrorsController implements ErrorController {
         int codigoError = (int) httpServletRequest.getAttribute("javax.servlet.error.status_code");
         switch (codigoError) {
             case 400:
-                errorMessage = "El recurso solicitado no existe.";
+                errorMessage = "La solicitud es incorrecta.";
                 break;
             case 401:
             case 403:

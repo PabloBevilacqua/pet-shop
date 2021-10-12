@@ -1,4 +1,3 @@
-
 package com.magicpet.petshop.entidades;
 
 import java.io.Serializable;
@@ -8,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -37,13 +37,14 @@ public class Producto implements Serializable {
     @Column(nullable = false)
     private Double precioUnitario;
 
-    private String imagenURL;
+    @OneToOne
+    private Imagen imagen;
 
     public Producto() {
     }
 
     public Producto(String id, String nombre, String codigo, String descripcion, Marca marca, Categoria categoria,
-            Integer stock, Double precioUnitario, String imagenURL) {
+            Integer stock, Double precioUnitario, Imagen imagen) {
         this.id = id;
         this.nombre = nombre;
         this.codigo = codigo;
@@ -52,7 +53,7 @@ public class Producto implements Serializable {
         this.categoria = categoria;
         this.stock = stock;
         this.precioUnitario = precioUnitario;
-        this.imagenURL = imagenURL;
+        this.imagen = imagen;
     }
 
     public String getId() {
@@ -119,19 +120,19 @@ public class Producto implements Serializable {
         this.precioUnitario = precioUnitario;
     }
 
-    public String getImagenURL() {
-        return imagenURL;
+    public Imagen getImagen() {
+        return imagen;
     }
 
-    public void setImagenURL(String imagenURL) {
-        this.imagenURL = imagenURL;
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 
     @Override
     public String toString() {
         return "Producto{" + "id=" + id + ", nombre=" + nombre + ", codigo=" + codigo + ", descripcion=" + descripcion
                 + ", marca=" + marca + ", categoria=" + categoria + ", stock=" + stock + ", precioUnitario="
-                + precioUnitario + ", imagenURL=" + imagenURL + '}';
+                + precioUnitario + "}";
     }
 
 }

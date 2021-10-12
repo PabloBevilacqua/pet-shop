@@ -7,7 +7,6 @@ import com.magicpet.petshop.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,8 +38,13 @@ public class UsuarioServicio implements UserDetailsService {
         checkPasswordConfirmation(password, confirmPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         
+        Usuario usuario = buscarPorUsernameOMail(username, mail);
+        if (usuario != null) {
+            throw new ErrorServicio("Ya hay un usuario registrado con ese nombre o correo electrónico.");
+        }
+        
         try {
-            Usuario usuario = new Usuario();
+            usuario = new Usuario();
             usuario.setRol(Role.USER);
             usuario.setMail(mail);
             usuario.setUsername(username);
@@ -50,7 +54,7 @@ public class UsuarioServicio implements UserDetailsService {
                 return usuario;
             }
         } catch (Exception e) {
-            throw new ErrorServicio("Hubo un error al crear el usuario");
+            throw new ErrorServicio(e.getMessage());
         }
         return null;
     }
@@ -64,7 +68,7 @@ public class UsuarioServicio implements UserDetailsService {
             try {
                 usuarioRepositorio.save(usuario);
             } catch (Exception e) {
-                throw new ErrorServicio("Hubo un error al crear el usuario");
+                throw e;
             }
         }
         return usuario;
@@ -97,6 +101,20 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
         return usuario;
     }
+    
+    @Transactional
+    public Usuario cambiarPassword(Usuario usuario, String oldPassword, String password, String confirmPassword) throws ErrorServicio {
+        checkPasswordConfirmation(password, confirmPassword);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        if (!encoder.matches(oldPassword, usuario.getPassword())) {
+            throw new ErrorServicio("La contraseña anterior no coincide");
+        }
+        
+        usuario.setPassword(encoder.encode(password));
+        usuarioRepositorio.save(usuario);
+        return usuario;
+    }
 
     @Transactional
     public Usuario cambiarRol(String id) throws ErrorServicio {
@@ -111,8 +129,19 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
+    public Usuario modificarPefil(Usuario usuario) {
+        usuarioRepositorio.save(usuario);
+        return usuario;
+    }
+    
+    @Transactional
     public void eliminar(Usuario usuario) {
         usuarioRepositorio.delete(usuario);
+    }
+    
+    public Usuario buscarPorUsernameOMail(String username, String mail) {
+        Usuario usuario = usuarioRepositorio.findByUsernameOrMail(username, mail);
+        return usuario;
     }
     
     private boolean esValido(Usuario usuario) throws ErrorServicio {
@@ -147,5 +176,13 @@ public class UsuarioServicio implements UserDetailsService {
         } catch (Exception e) {
             throw new UsernameNotFoundException("El usuario no existe");
         }
+    }
+    
+    public Usuario obtenerPorUsename(String username) throws ErrorServicio {
+        Usuario usuario = usuarioRepositorio.findByUsername(username);
+        if (usuario == null) {
+            throw new ErrorServicio("No se encontró el usuario");
+        }
+        return usuario;
     }
 }
