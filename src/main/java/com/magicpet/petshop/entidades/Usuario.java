@@ -43,6 +43,8 @@ public class Usuario implements Serializable {
     
     private String dni;
     
+    private Boolean esActivo;
+    
     private String ciudad;
     
     @OneToOne
@@ -137,6 +139,14 @@ public class Usuario implements Serializable {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public Boolean getEsActivo() {
+        return esActivo;
+    }
+
+    public void setEsActivo(Boolean esActivo) {
+        this.esActivo = esActivo;
     }
 
   @Override

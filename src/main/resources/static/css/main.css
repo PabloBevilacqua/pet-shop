@@ -89,6 +89,17 @@ main.bg-amarillo {
     margin-left: auto;
 }
 
+
+.circle-pic{
+    
+    text-align: center;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    
+    
+}
+
 /* FOOTER */
 
 footer {

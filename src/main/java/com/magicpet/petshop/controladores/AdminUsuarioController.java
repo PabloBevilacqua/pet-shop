@@ -184,5 +184,15 @@ public class AdminUsuarioController {
         }
         return "redirect:/admin/usuarios";
     }
+    
+    public String enableDisable (@PathVariable String id, RedirectAttributes redirectAttributes){
+        try {
+            usuarioServicio.habilitarDeshabilitar(id, Boolean.TRUE);
+            redirectAttributes.addFlashAttribute("success", "Se habilitó/deshabilitó del usuario correctamente.");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
+        return "redirect:/admin/usuarios";
+    }
 
 }
