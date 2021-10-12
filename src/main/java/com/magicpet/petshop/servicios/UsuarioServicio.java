@@ -34,12 +34,12 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public Usuario nuevoRegistro(String username, String password, String confirmPassword, String mail) throws ErrorServicio {
+    public Usuario nuevoRegistro(String username, String password, String confirmPassword, String mail, Boolean esActivo) throws ErrorServicio {
         checkPasswordConfirmation(password, confirmPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         
         Usuario usuario = buscarPorUsernameOMail(username, mail);
-        if (usuario != null) {
+        if (usuario != null || esActivo==true) {
             throw new ErrorServicio("Ya hay un usuario registrado con ese nombre o correo electrónico.");
         }
         
@@ -119,7 +119,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public Usuario cambiarRol(String id) throws ErrorServicio {
         Usuario usuario = usuarioRepositorio.getById(id);
-        if (usuario.getRol() == Role.ADMIN) {
+        if ( usuario.getRol() == Role.ADMIN) {
             usuario.setRol(Role.USER);
         } else {
             usuario.setRol(Role.ADMIN);
@@ -129,9 +129,25 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public Usuario modificarPefil(Usuario usuario) {
+    public Usuario habilitarDeshabilitar(String id, Boolean esActivo){
+        Usuario usuario = usuarioRepositorio.getById(id);
+        if (usuario.getEsActivo()) {
+            usuario.setEsActivo(false);
+        } else{
+            usuario.setEsActivo(true);
+        }
+        return null;
+    }
+    
+    @Transactional
+    public Usuario modificarPefil(Usuario usuario, Boolean esActivo) {
+        if(esActivo) {
         usuarioRepositorio.save(usuario);
         return usuario;
+    }
+        else {
+            throw new Error("El usuario esta inhabilitado");
+        }
     }
     
     @Transactional
@@ -140,8 +156,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     public Usuario buscarPorUsernameOMail(String username, String mail) {
-        Usuario usuario = usuarioRepositorio.findByUsernameOrMail(username, mail);
-        return usuario;
+            Usuario usuario = usuarioRepositorio.findByUsernameOrMail(username, mail);
+            return usuario;
     }
     
     private boolean esValido(Usuario usuario) throws ErrorServicio {
@@ -184,5 +200,13 @@ public class UsuarioServicio implements UserDetailsService {
             throw new ErrorServicio("No se encontró el usuario");
         }
         return usuario;
+    }
+
+    public void modificarPefil(Usuario usuario) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void nuevoRegistro(String username, String password, String confirmPassword, String mail) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
