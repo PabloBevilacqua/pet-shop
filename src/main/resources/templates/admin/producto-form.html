@@ -16,22 +16,27 @@
         <section>
             <h2 th:text="${titulo}"></h2>
 
-            <form th:action="${action}" method="POST" th:object="${producto}">
+            <form th:action="${action}" method="POST" th:object="${producto}" enctype="multipart/form-data">
                 <input type="hidden" name="id" th:value="*{id}" placeholder="Id" />
 
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" th:value="*{nombre}" placeholder="Nombre del producto" />
 
+                <label for="codigo">Código</label>
+                <input type="text" name="codigo" th:value="*{codigo}" placeholder="#3687" />
+
+                <label for="stock">Stock</label>
+                <input type="number" name="stock" th:value="*{stock}" placeholder="Cantidad de items" />
+
                 <label for="descripcion">Descripción</label>
-                <input type="text" name="descripcion" th:value="*{descripcion}"
-                    placeholder="Descripcion del producto" />
+                <textarea name="descripcion" th:text="*{descripcion}" cols="30" rows="10"></textarea>
 
                 <label for="precioUnitario">Precio por unidad</label>
                 <input type="number" name="precioUnitario" th:value="*{precioUnitario}"
                     placeholder="Precio del producto" />
-                <!-- <input type="number" name="stock" th:value="*{stock}" placeholder="Stock del producto" />
-                <input type="number" name="marca" th:value="*{marca.id}" placeholder="Marca" />
-                <input type="number" name="categoria" th:value="*{categoria.id}" placeholder="Categoria" /> -->
+
+                <label for="archivo">Imagen del producto</label>
+                <input type="file" name="archivo" placeholder="Imagen del producto" />
 
                 <p th:if="${error != null}" th:text="${error}" class="message error">Un error</p>
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Magic and Strange Pet Shop!</title>
+</head>
+
+<body>
+    <nav th:replace="/fragmentos/nav :: nav"></nav>
+
+    <main class="bg-agua" th:object="${usuario}">
+        <section>
+            <h3 th:text="*{username}+' ['+*{rol}+']'"></h3>
+            <img th:if="*{imagen != null}" th:src="'/imagen/usuario/'+*{id}" alt="">
+
+            <p th:if="${error != null}" th:text="${error}" class="message error"></p>
+            <p th:if="${success != null}" th:text="${success}" class="message success"></p>
+
+            <a href="/profile/password" class="btn primary">Cambiar contraseña</a>
+            <a href="/profile/edit" class="btn primary">Editar perfil</a>
+
+            <p th:text="*{mail}"></p>
+        </section>
+    </main>
+
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+</body>
+
+</html>

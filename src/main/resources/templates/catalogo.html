@@ -23,7 +23,7 @@
         <h2>Productos</h2>
 
         <article th:each="producto : ${productos}" class="producto">
-            <img src="/img/icons/libro.png">
+            <img th:src="'/imagen/producto/'+${producto.id}">
             <h3 th:text="${producto.nombre}"></h3>
             <p th:text="${producto.descripcion}"></p>
             <div th:text="${producto.precioUnitario}" class="precio">$123.00</div>
