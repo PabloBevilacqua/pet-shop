@@ -185,9 +185,10 @@ public class AdminUsuarioController {
         return "redirect:/admin/usuarios";
     }
     
+    @GetMapping("/activar/{id}")
     public String enableDisable (@PathVariable String id, RedirectAttributes redirectAttributes){
         try {
-            usuarioServicio.habilitarDeshabilitar(id, Boolean.TRUE);
+            usuarioServicio.habilitarDeshabilitar(id);
             redirectAttributes.addFlashAttribute("success", "Se habilitó/deshabilitó del usuario correctamente.");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());

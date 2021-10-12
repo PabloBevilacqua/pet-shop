@@ -34,18 +34,19 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public Usuario nuevoRegistro(String username, String password, String confirmPassword, String mail, Boolean esActivo) throws ErrorServicio {
+    public Usuario nuevoRegistro(String username, String password, String confirmPassword, String mail) throws ErrorServicio {
         checkPasswordConfirmation(password, confirmPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         
         Usuario usuario = buscarPorUsernameOMail(username, mail);
-        if (usuario != null || esActivo==true) {
+        if (usuario != null) {
             throw new ErrorServicio("Ya hay un usuario registrado con ese nombre o correo electrónico.");
         }
         
         try {
             usuario = new Usuario();
             usuario.setRol(Role.USER);
+            usuario.setEsActivo(true);
             usuario.setMail(mail);
             usuario.setUsername(username);
             usuario.setPassword(encoder.encode(password));
@@ -64,6 +65,7 @@ public class UsuarioServicio implements UserDetailsService {
         checkPasswordConfirmation(password, confirmPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setPassword(encoder.encode(password));
+        usuario.setEsActivo(true);
         if (esValido(usuario)) {
             try {
                 usuarioRepositorio.save(usuario);
@@ -129,25 +131,21 @@ public class UsuarioServicio implements UserDetailsService {
     }
     
     @Transactional
-    public Usuario habilitarDeshabilitar(String id, Boolean esActivo){
+    public Usuario habilitarDeshabilitar(String id){
         Usuario usuario = usuarioRepositorio.getById(id);
         if (usuario.getEsActivo()) {
             usuario.setEsActivo(false);
         } else{
             usuario.setEsActivo(true);
         }
-        return null;
-    }
-    
-    @Transactional
-    public Usuario modificarPefil(Usuario usuario, Boolean esActivo) {
-        if(esActivo) {
         usuarioRepositorio.save(usuario);
         return usuario;
     }
-        else {
-            throw new Error("El usuario esta inhabilitado");
-        }
+    
+    @Transactional
+    public Usuario modificarPefil(Usuario usuario) {
+        usuarioRepositorio.save(usuario);
+        return usuario;
     }
     
     @Transactional
@@ -202,11 +200,4 @@ public class UsuarioServicio implements UserDetailsService {
         return usuario;
     }
 
-    public void modificarPefil(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void nuevoRegistro(String username, String password, String confirmPassword, String mail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

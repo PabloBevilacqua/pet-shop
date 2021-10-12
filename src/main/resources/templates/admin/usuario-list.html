@@ -53,9 +53,9 @@
                                 th:href="@{'/admin/usuarios/rol/' + ${usuario.id}}"><i
                                     th:attr="class=${usuario.rol.name() == 'ADMIN' ? 'bi bi-bookmark-star-fill' : 'bi bi-bookmark'}"></i></a>
 
-                            <a title="Eliminar" class="actions red"
-                                th:href="@{'/admin/usuarios/delete/' + ${usuario.id}}"><i
-                                    class="bi bi-trash-fill"></i></a>
+                            <a title="Habilitar/Deshabilitar" class="actions red"
+                                th:href="@{'/admin/usuarios/activar/' + ${usuario.id}}"><i
+                                    th:attr="class=${usuario.esActivo == true ? 'bi bi-toggle2-on' : 'bi bi-toggle2-off'}"></i></a>
                         </td>
                     </tr>
                 </tbody>
