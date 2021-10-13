@@ -25,6 +25,8 @@ public class Producto implements Serializable {
 
     @Column(nullable = false)
     private String descripcion;
+    
+    private String descripcionCompleta;
 
     @ManyToOne
     private Marca marca;
@@ -126,6 +128,14 @@ public class Producto implements Serializable {
 
     public void setImagen(Imagen imagen) {
         this.imagen = imagen;
+    }
+
+    public String getDescripcionCompleta() {
+        return descripcionCompleta;
+    }
+
+    public void setDescripcionCompleta(String descripcionCompleta) {
+        this.descripcionCompleta = descripcionCompleta;
     }
 
     @Override

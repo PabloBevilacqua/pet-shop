@@ -192,8 +192,8 @@ h1, h2 {
 .productos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    max-width: 70rem;
+    justify-content: space-between;
+    max-width: 60rem;
     margin: auto;
 }
 

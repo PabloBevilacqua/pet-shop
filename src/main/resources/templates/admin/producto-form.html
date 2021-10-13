@@ -29,7 +29,10 @@
                 <input type="number" name="stock" th:value="*{stock}" placeholder="Cantidad de items" />
 
                 <label for="descripcion">Descripción</label>
-                <textarea name="descripcion" th:text="*{descripcion}" cols="30" rows="10"></textarea>
+                <input type="text" name="descripcion" th:value="*{descripcion}" placeholder="Descripción breve" />
+
+                <label for="descripcionCompleta">Descripción completa</label>
+                <textarea name="descripcionCompleta" th:text="*{descripcionCompleta}" cols="30" rows="10"></textarea>
 
                 <label for="precioUnitario">Precio por unidad</label>
                 <input type="number" name="precioUnitario" th:value="*{precioUnitario}"

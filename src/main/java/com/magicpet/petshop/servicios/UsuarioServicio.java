@@ -110,7 +110,11 @@ public class UsuarioServicio implements UserDetailsService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         if (!encoder.matches(oldPassword, usuario.getPassword())) {
-            throw new ErrorServicio("La contraseña anterior no coincide");
+            throw new ErrorServicio("La contraseña actual no coincide");
+        }
+        
+        if (encoder.matches(password, usuario.getPassword())) {
+            throw new ErrorServicio("La contraseña nueva no puede ser igual a la anterior");
         }
         
         usuario.setPassword(encoder.encode(password));
