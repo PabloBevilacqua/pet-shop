@@ -18,6 +18,12 @@ body, html {
 
 /* BACKGROUND COLORS */
 
+.bg-flashero {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
 .bg-agua {
     background-color: #AFECE0;
 }
@@ -89,15 +95,11 @@ main.bg-amarillo {
     margin-left: auto;
 }
 
-
 .circle-pic{
-    
     text-align: center;
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    
-    
 }
 
 /* FOOTER */
@@ -172,18 +174,18 @@ h1, h2 {
     transition: 200ms ease-in-out;
 }
 
-.btn.cancel {
-    background-color: #c84a4a;
-    color: white;
-    text-align: center;
-}
-
-.btn.cancel:hover {
-    background-color: var(--lightGray-1);
+.cancel {
+    margin-top: 1rem;
     color: #c84a4a;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-.btn.right {
+.cancel:hover {
+    color: #694DFF;
+}
+
+btn.right {
     margin-left: auto;
 }
 
@@ -250,6 +252,59 @@ form label, input.btn {
     margin: 1rem 0px 0px;
 }
 
+form .file {
+    position: relative;
+    display: inline-block;
+}
+
+.file::before {
+    background-color: white;
+    color: black;
+    display: flex;
+    border-radius: 6px;
+    justify-content: center;
+    align-items: center;
+    content: 'Seleccionar archivo';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+    border: 1px solid black;
+    height: fit-content;
+    width: fit-content;
+    padding: 0.5rem;
+}
+
+.file input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 32px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+form select {
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+form textarea {
+    border-radius: 6px;
+    border: 1px solid black;
+    padding: 0.5rem;
+}
+
+form input[type="file"] {
+    background-color: #FFFFBF;
+    cursor: pointer;
+}
+
+form input[type="file"]:hover {
+    background-color: white;
+}
+
 form label {
     font-family: 'Fira Sans', sans-serif;
 }
@@ -280,4 +335,18 @@ form label {
 .success {
     background-color: #78f378;
     color: black;
+}
+
+/* ANIMACIONES */
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

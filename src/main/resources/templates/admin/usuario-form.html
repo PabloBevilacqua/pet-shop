@@ -40,8 +40,8 @@
 
                 <p th:if="${error != null}" th:text="${error}" class="message error"></p>
 
-                <a href="/admin/usuarios" class="btn cancel">Cancelar</a>
                 <input th:value="${titulo}" type="submit" class="btn primary">
+                <a href="/admin/usuarios" class="cancel">Cancelar</a>
             </form>
         </section>
     </main>

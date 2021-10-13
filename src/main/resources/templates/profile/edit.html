@@ -32,10 +32,10 @@
                 <input type="date" th:value="*{fechaDeNacimiento}" name="fechaDeNacimiento" placeholder="12/12/1990">
 
                 <label for="archivo">Foto de perfil</label>
-                <input type="file" name="archivo">
+                <div class="file"><input type="file" name="archivo"></div>
 
-                <a href="/profile" class="btn cancel">Cancelar</a>
                 <input type="submit" class="btn primary" value="Guardar cambios">
+                <a href="/profile" class="cancel">Cancelar</a>
             </form>
             <p th:if="${error != null}" th:text="${error}" class="error message"></p>
             <p th:if="${success != null}" th:text="${success}" class="success message"></p>
