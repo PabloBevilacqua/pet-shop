@@ -7,31 +7,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
     <title>Magic and Strange Pet Shop!</title>
+    <link rel="shortcut icon" href="/img/logo-256.png" type="image/png">
 </head>
 
 <body>
     <nav th:replace="/fragmentos/nav :: nav"></nav>
 
-    <main class="bg-flashero">
+    <main class="bg-amarillo">
         <section class="container">
             <h1>Magic and Strange Pet Shop!</h1>
             <div class="left">
-                <img src="/img/icons/bola.png" alt="bola de cristal"><br>
-                <!-- <img src="/img/icons/varita.png" alt="varita mágica">
-                <img src="/img/icons/sombrero.png" alt="sombrero de mago"> -->
+                <span style="font-size: 7rem;">🧙‍♀️</span>
             </div>
             <div class="right">
-                <p class="medium">Lorem ipsum dolor sit amet,<br> dadipisicing elit.</p>
-                <a class="btn primary" href="/productos">Ver catálogo</a>
+                <p class="medium">Nos dedicamos a la investigación y desarrollo<br>de productos para <strong>personas no
+                        humanas 🐱🐶🧙‍♂️</strong></p>
+                <a class="btn primary" href="/productos" style="float: right;">Ver catálogo</a>
             </div>
         </section>
     </main>
 
-    <section class="bg-amarillo">
-        <h2 class="center">Quiénes somos</h2>
+    <section class="center pb3">
+        <h2 class="pt2">Experiencias únicas para tus mascotas</h2>
 
-        <p class="center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil illum ipsam officiis atque
-            sunt molestiae aliquam eveniet voluptatibus repudiandae exercitationem?</p>
+        <p class="pb3">Una gran variedad de productos, innovadores y hasta extraños. una mágica experiencia.
+        </p>
+
+        <div class="tarjetas">
+            <div class="item">
+                <div class="tarjeta bg-amarillo">🧭</div>
+                <div class="title">Novedad</div>
+            </div>
+
+            <div class="item">
+                <div class="tarjeta bg-agua">✨</div>
+                <div class="title">Magia</div>
+            </div>
+
+            <div class="item">
+                <div class="tarjeta bg-violeta">🧪</div>
+                <div class="title">Ciencia</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-agua">
+        <div class="repadding">
+            <h2 class="center">Quiénes somos</h2>
+
+            <p class="center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil illum ipsam officiis atque
+                sunt molestiae aliquam eveniet voluptatibus repudiandae exercitationem?</p>
+        </div>
+    </section>
+
+    <section class="contacto">
+        <h2 class="center">Contacto</h2>
+        <span class="center">Escríbenos un mensaje y cuéntanos de tu mascota</span>
+        <form action="/mensaje" method="POST" class="reppading">
+            <label for="mail">Correo</label>
+            <input type="email" name="mail" placeholder="firulais@catdog.com">
+
+            <label for="mensaje">Mensaje</label>
+            <textarea name="mensaje" cols="30" rows="10"></textarea>
+
+            <input class="btn primary" type="submit">
+        </form>
+        <p th:if="${error != null}" th:text="${error}" class="message error"></p>
+        <p th:if="${success != null}" th:text="${success}" class="message success"></p>
     </section>
 
     <footer th:replace="/fragmentos/footer :: footer"></footer>

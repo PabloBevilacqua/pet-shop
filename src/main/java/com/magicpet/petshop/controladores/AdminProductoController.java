@@ -87,9 +87,11 @@ public class AdminProductoController {
 
     @PostMapping("/edit/{id_producto}")
     public String adminEditProducto(@PathVariable String id_producto, Model model,
-            RedirectAttributes redirectAttributes, @ModelAttribute("producto") Producto producto) {
+            RedirectAttributes redirectAttributes,
+            @ModelAttribute("producto") Producto producto,
+            MultipartFile archivo) {
         try {
-            productoServicio.modificarProducto(producto);
+            productoServicio.modificarProducto(producto, archivo);
             redirectAttributes.addFlashAttribute("success", "El producto se modificó correctamente");
         } catch (Exception e) {
             model.addAttribute("titulo", "Modificar producto");

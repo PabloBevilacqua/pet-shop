@@ -24,17 +24,25 @@ public class ProductoServicio {
     public void registrarProducto(Producto producto, MultipartFile archivo) throws ErrorServicio {
         
         validarCodigo(producto.getCodigo());
-        Imagen imagen = imagenServicio.guardar(archivo);
-        producto.setImagen(imagen);
-        
+        if (archivo != null) {
+            Imagen imagen = imagenServicio.guardar(archivo);
+            producto.setImagen(imagen);
+        }
+
         productoRepositorio.save(producto);
     }
 
     @Transactional
-    public void modificarProducto(Producto producto) throws ErrorServicio {
+    public void modificarProducto(Producto producto, MultipartFile archivo) throws ErrorServicio {
         Producto respuesta = productoRepositorio.getById(producto.getId());
         if (respuesta != null) {
             validarCodigo(producto.getCodigo());
+            if (!archivo.isEmpty()) {
+                Imagen imagen = imagenServicio.guardar(archivo);
+                producto.setImagen(imagen);
+            } else {
+                producto.setImagen(respuesta.getImagen());
+            }
             productoRepositorio.save(producto);
         } else {
             throw new ErrorServicio("El producto no existe");
