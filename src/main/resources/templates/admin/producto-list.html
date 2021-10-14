@@ -39,7 +39,7 @@
                 <tbody>
                     <tr th:each="producto, iterator : ${productos}">
                         <td th:text="${iterator.index + 1}">01</td>
-                        <td th:text="${producto.codigo}">01</td>
+                        <td th:text="${'#'+producto.codigo}">01</td>
                         <td th:text="${producto.nombre}"></td>
                         <td th:utext="${producto.descripcion}">
                         </td>

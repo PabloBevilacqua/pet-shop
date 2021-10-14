@@ -55,7 +55,8 @@ nav li {
     padding: 0 1rem;
 }
 
-nav li:nth-last-child(2) {
+nav .nav-right {
+    display: flex;
     margin-left: auto;
 }
 
@@ -209,19 +210,44 @@ btn.right {
     text-align: center;
     cursor: pointer;
     /* transition: all 0.5s ease-out; */
+    background-color: rgba(255,255,125,0.20);
 }
 
 .producto:hover {
     box-shadow: 0 8px 16px rgb(105, 77, 255, .2);
     transform: translate(0, -5px);
-    background-color: var(--lightGray-1);
+    background-color: #69F7BE;
     transition: all 300ms ease-in-out;
 }
 
 .producto img {
-    background-color: white;
     border: solid 1px var(--lightGray-2);
     max-width: 15rem;
+}
+
+.producto a {
+    text-decoration: none;
+    color: #1A1A1A;
+}
+
+.producto .precio::before {
+    content: '$ ';
+}
+
+.producto .precio::after {
+    content: '0';
+}
+
+.producto .precio {
+    background-color: #78f378;
+    padding: 0.5rem 0.5rem;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5rem;
+    width: fit-content;
+    margin: 0 auto 0 auto;
+    color: #1A1A1A;
 }
 
 /* FORM */
@@ -252,39 +278,6 @@ form label, input.btn {
     margin: 1rem 0px 0px;
 }
 
-form .file {
-    position: relative;
-    display: inline-block;
-}
-
-.file::before {
-    background-color: white;
-    color: black;
-    display: flex;
-    border-radius: 6px;
-    justify-content: center;
-    align-items: center;
-    content: 'Seleccionar archivo';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    cursor: pointer;
-    border: 1px solid black;
-    height: fit-content;
-    width: fit-content;
-    padding: 0.5rem;
-}
-
-.file input[type="file"] {
-    opacity: 0;
-    width: 200px;
-    height: 32px;
-    display: inline-block;
-    cursor: pointer;
-}
-
 form select {
     padding: 0.5rem;
     border-radius: 6px;
@@ -297,12 +290,12 @@ form textarea {
 }
 
 form input[type="file"] {
-    background-color: #FFFFBF;
+    background-color: white;
     cursor: pointer;
 }
 
-form input[type="file"]:hover {
-    background-color: white;
+form input:hover, form select:hover, form textarea:hover {
+    background-color: #69F7BE;
 }
 
 form label {
@@ -318,6 +311,24 @@ form label {
 .form-registrar input {
     background-color: var(--lightGray-1);
 }
+
+form .btn.primary {
+    background-color: #694DFF;
+    color: #F2F2F2;
+}
+
+form .btn.primary:hover {
+    background-color: #F2F2F2;
+    color: #694DFF;
+}
+
+.form-login input:hover {
+    background-color: var(--lightGray-1);
+}
+.form-registrar input:hover {
+    background-color: white;
+}
+
 
 /* MENSAJES ÉXITO Y ERROR */
 

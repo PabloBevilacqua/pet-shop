@@ -45,9 +45,7 @@ table tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
 }
 td:last-child {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
+    text-align: center;
 }
 td:first-child {
     text-align: center;
@@ -73,14 +71,25 @@ section form {
 
 /* MENU */
 
+.descripcion {
+    width: 100%;
+}
+
 menu {
     padding: 0px;
+    margin: auto;
+    display: flex;
 }
 
 menu a {
     display: block;
     padding: 1rem;
     color: #1A1A1A;
+    border: 1px solid #1A1A1A;
+    border-radius: 1rem;
+    margin: 0.5rem;
+    background-color: white;
+    text-align: center;
 }
 
 menu a {
@@ -91,7 +100,6 @@ menu a {
 menu a:hover {
     background-color: #694DFF;
     color: white;
-    border-radius: 1rem;
 }
 
 .actions {

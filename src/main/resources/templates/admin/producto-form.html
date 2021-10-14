@@ -12,11 +12,12 @@
 <body>
     <nav th:replace="/fragmentos/nav :: nav"></nav>
 
-    <main>
+    <main class="bg-amarillo">
         <section>
-            <h2 th:text="${titulo}"></h2>
 
             <form th:action="${action}" method="POST" th:object="${producto}" enctype="multipart/form-data">
+                <h2 th:text="${titulo}"></h2>
+
                 <input type="hidden" name="id" th:value="*{id}" placeholder="Id" />
 
                 <label for="nombre">Nombre</label>

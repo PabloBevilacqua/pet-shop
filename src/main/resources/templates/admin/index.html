@@ -12,13 +12,16 @@
 <body>
     <nav th:replace="/fragmentos/nav :: nav"></nav>
 
-    <main>
-        <h1>Panel de administración</h1>
+    <main class="bg-amarillo">
+        <h1 class="center">Panel de administración</h1>
 
-        <ul>
-            <li><a href="/admin/productos">Productos</a></li>
-            <li><a href="/admin/usuarios">Usuarios</a></li>
-        </ul>
+        <p class="descripcion center">Bienvenido al detrás de escena! 🌟</p>
+
+        <menu>
+            <a href="/admin/productos">Productos</a>
+            <a href="/admin/usuarios">Usuarios</a>
+        </menu>
+
     </main>
 
     <footer th:replace="/fragmentos/footer :: footer"></footer>
