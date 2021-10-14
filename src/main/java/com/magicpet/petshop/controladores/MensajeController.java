@@ -4,6 +4,7 @@ import com.magicpet.petshop.entidades.Mensaje;
 import com.magicpet.petshop.servicios.MensajeServicio;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ public class MensajeController {
         }
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/ver")
     public String verMensajes(RedirectAttributes redirectAttributes, Model model) {
         try {
