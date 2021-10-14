@@ -165,14 +165,19 @@ public class UsuarioServicio implements UserDetailsService {
     private boolean esValido(Usuario usuario) throws ErrorServicio {
         if (usuario.getUsername().isEmpty() || usuario.getUsername() == null) {
             throw new ErrorServicio("El campo usuario no puede estar vacío");
-        } else if (usuario.getMail().isEmpty() || usuario.getMail() == null) {
+        }
+        if (usuario.getMail().isEmpty() || usuario.getMail() == null) {
             throw new ErrorServicio("El campo correo electrónico no puede estar vacío");
-        } else if (usuario.getUsername().isEmpty() || usuario.getUsername() == null) {
-            throw new ErrorServicio("El campo usuario no puede estar vacío");
-        } else if (usuario.getUsername().isEmpty() || usuario.getUsername() == null) {
+        }
+        if (usuario.getUsername().isEmpty() || usuario.getUsername() == null) {
             throw new ErrorServicio("El campo usuario no puede estar vacío");
         }
-        // TO DO: check if valid email
+        if (usuario.getUsername().isEmpty() || usuario.getUsername() == null) {
+            throw new ErrorServicio("El campo usuario no puede estar vacío");
+        }
+        if (!usuario.getMail().matches("^[^@\\s]+@[^@\\s\\.]+\\.[^@\\.\\s]+$")) {
+            throw new ErrorServicio("El email no es válido.");
+        }
         return true;
     }
     

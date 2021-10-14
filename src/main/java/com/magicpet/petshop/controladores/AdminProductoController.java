@@ -58,7 +58,9 @@ public class AdminProductoController {
             return "redirect:/admin/productos";
         } catch (Exception e) {
             model.addAttribute("producto", producto);
-            model.addAttribute("error", "No se pudo agregar el producto");
+            model.addAttribute("action", "/admin/productos/add");
+            model.addAttribute("titulo", "Agregar producto");
+            model.addAttribute("error", e.getMessage());
             return "admin/producto-form";
         }
     }
