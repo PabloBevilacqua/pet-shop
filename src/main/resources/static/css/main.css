@@ -77,10 +77,30 @@ footer {
     background-color: white;
     border-top: solid 1px black;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     padding: 1rem 0.5rem;
 }
 
+footer div li {
+    list-style-type: none;
+    padding: 0.3rem;
+    margin: auto;
+}
+
+footer div li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #694DFF;
+}
+
+footer div li a:hover {
+    color: #e73c7e;
+}
+
+footer div .brand {
+    margin-top: 0px;
+}
 
 /* MAIN */
 
@@ -116,7 +136,7 @@ main.bg-amarillo {
 }
 
 .repadding {
-    max-width: 25rem;
+    max-width: 35rem;
     margin: auto;
     padding: 3rem;
     border-radius: 20px;
@@ -169,6 +189,13 @@ main.bg-amarillo {
     font-size: 2rem;
 }
 
+/* QUIENES SOMOS */
+
+.quienes-somos {
+    width: fit-content;
+    margin: auto;
+}
+
 /* CONTACTO */
 
 .contacto {
@@ -176,13 +203,10 @@ main.bg-amarillo {
     margin: auto;
 }
 
-/* FOOTER */
-
-footer {
-    padding-top: 5rem;
+.texto-contacto {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    font-size: 0.8rem;
 }
 
 /* FONT */

@@ -3,12 +3,14 @@ package com.magicpet.petshop.entidades;
 import com.magicpet.petshop.enums.Role;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,8 +51,19 @@ public class Usuario implements Serializable {
     
     @OneToOne
     private Imagen imagen;
+    
+    @ManyToMany
+    private List<Producto> favoritos;
 
     public Usuario() {
+    }
+
+    public List<Producto> getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(List<Producto> favoritos) {
+        this.favoritos = favoritos;
     }
 
     public Role getRol() {

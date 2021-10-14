@@ -2,8 +2,10 @@ package com.magicpet.petshop.servicios;
 
 import com.magicpet.petshop.entidades.Imagen;
 import com.magicpet.petshop.entidades.Producto;
+import com.magicpet.petshop.entidades.Usuario;
 import com.magicpet.petshop.errores.ErrorServicio;
 import com.magicpet.petshop.repositorios.ProductoRepositorio;
+import com.magicpet.petshop.repositorios.UsuarioRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class ProductoServicio {
 
     @Autowired
     private ProductoRepositorio productoRepositorio;
-    
+
     @Autowired
     private ImagenServicio imagenServicio;
 
