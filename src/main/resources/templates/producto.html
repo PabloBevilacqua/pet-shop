@@ -13,19 +13,18 @@
 <body>
     <nav th:replace="/fragmentos/nav :: nav"></nav>
 
-    <main class="bg-agua" th:object="${producto}">
+    <main class="bg-agua contenedor-producto" th:object="${producto}">
 
-        <img th:if="*{imagen != null}" th:src="'/imagen/producto/'+*{id}" alt="">
+        <div>
+            <img id="imagen-producto" th:if="*{imagen != null}" th:src="'/imagen/producto/'+*{id}">
+        </div>
 
-        <section>
+        <div class="vista-producto p1">
             <h3 th:text="*{nombre}"></h3>
 
-            <p th:text="*{descripcionCompleta}"></p>
-
-            <div>
-                <p th:text="*{'$'+precioUnitario}"></p>
-            </div>
-        </section>
+            <p class="descripcion-producto" th:text="*{descripcionCompleta}"></p>
+            <span class="precio" th:text="*{'$'+precioUnitario+'0'}"></span>
+        </div>
     </main>
 
     <footer th:replace="/fragmentos/footer :: footer"></footer>
